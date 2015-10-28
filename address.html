@@ -1,0 +1,79 @@
+<head>
+  <title>Address Book v1</title>
+</head>
+
+<body>
+  <div class="container">
+    {{> loginButtons}}
+
+    {{#if currentUser}}
+    <header>
+      <h1>Address Book by bkeys</h1>
+
+      <form class="new-task">
+	<input type="text" name="text" placeholder="Type to add new tasks" />
+      </form>
+
+      <ul>
+	{{#each tasks}}
+	{{> upload}}
+	{{> task}}
+	{{/each}}
+      </ul>
+
+    </header>
+
+    {{/if}}
+  </div>
+
+</body>
+
+<template name="upload">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+	<h3 class="panel-title">Uploads section</h3>
+      </div>
+      <div class="panel-body">
+	<p>
+	  <span class="btn btn-default btn-file">
+	    <input class="file fileInput" type="file"/>
+	  </span>
+	</p>
+	<div class="col-md-9">
+	  <table class="table table-hover table-striped table-bordered">
+	    <tread>
+	      <th>Name</th>
+	      <th>Download</th>
+	    </tread>
+	    <tbody>
+	      {{#each uploads}}
+	      <tr>
+		<td>{{name}}</td>
+		<td>
+		  <a class="btn btn-primary" href="{{url download=true}}">
+		    Download
+		  </a>
+		</td>
+		<td></td>
+	      </tr>
+	      {{/each}}
+	    </tbody>
+	  </table>
+	</div>
+      </div>
+      <div class="panel-footer">
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="task">
+  <li class="{{#if checked}}checked{{/if}}">
+    <button class="delete">&times;</button>
+
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+
+    <span class="text">{{text}}</span>
+  </li>
+</template>
